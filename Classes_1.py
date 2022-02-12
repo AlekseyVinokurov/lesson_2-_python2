@@ -102,6 +102,22 @@ class equations_2:
         return z
 
 
+# Вариант kwargs Класс с таблицей и словарем
+
+class example_3:
+
+    def __init__(self, **kwargs):
+        self.ans = kwargs
+
+    def __str__(self):
+        s: str = ""
+
+        for kwarg, name in self.ans.items():
+            s += f"{kwarg}: {name} \n"
+        return (s)
+
+
+
 # Вариант 4
 
 class Myclass_1:
@@ -116,3 +132,126 @@ class Myclass_2:
 def print_hi(name):
     # Use a breakpoint in the code line below to debug your script.
     print(f'Hi, {name}')  # Press Ctrl+F8 to toggle the breakpoint.
+
+
+### Примеры работы с классами (перезагрузка, собственные классы)
+class MyClass_3:
+    x = int
+    def __init__(self, x = int): # Конструктор
+        self.x = 10 # Атрибут экземпляра класса
+    def print_x(self): # self — это ссылка на экземпляр класса
+        print(self.x) # Выводим значение атрибута
+    def __getattr__(self, item):
+        print("не получается")
+        return 0
+    def __len__(self):
+        i = 0
+        n=self.x
+        while n > 0:
+            n = n // 10
+            i += 1
+        return i
+
+class MyNomber:
+    def __init__(self, nunber = 0): # Конструктор
+        self.x = nunber # Атрибут экземпляра класса
+    def __add__(self, other):
+        return self.x + other
+
+    def __add__(self, other):
+        if isinstance(other, MyNomber):
+            return self.x + other.x
+        else:
+            return self.x + other
+
+    def __len__(self):
+        i = 0
+        n = self.x
+        while n > 0:
+            n = n // 10
+            i+=1
+        return i
+    def __str__(self):
+        print(self.x)
+
+class MyPercentClass:
+    x=0;
+    def __init__(self, number=0): # Конструктор
+        self.x = number/100
+
+    def get_value(self, number):
+        self.x = number/100
+        return self.x
+
+
+    def __add__(self, other):
+        if isinstance(other, MyPercentClass):
+            return self.x + other.x
+        else:
+            return self.x*other + other
+
+    def __radd__(self, other):
+        if isinstance(other, MyPercentClass):
+            return self.x + other.x
+        else:
+            return self.x*other + other
+
+    def __mul__(self, other):
+        if isinstance(other, MyPercentClass):
+            return self.x + other.x
+        else:
+            return self.x*other
+
+    def __rmul__(self, other):
+        if isinstance(other, MyPercentClass):
+            return self.x + other.x
+        else:
+            return self.x*other
+
+    def __str__(self):
+        #print(f"{self.x*100}")
+        return str(self.x*100)+"%"
+
+
+class GetSetDemonstration_1:
+    def __init__(self, name = "Без имени", age = 0):
+        self.__name = name
+        self.__age = age
+
+    def get_age(self):
+        return self.__age
+    def set_age (self, age):
+        if 1< age < 100:
+            self.__age = age
+        else:
+            print(" Недопустимый возраст")
+
+    def get_name(self):
+        return self.__name
+    def set_name (self, name):
+        self.__name = str(name)
+
+
+class GetSetDemonstration_2:
+    def __init__(self, name = "Без имени", age = 0):
+        self.__name = name
+        self.__age = age
+
+    @property
+    def age(self):
+        return self.__age
+
+    @age.setter
+    def age (self, age):
+        if 1< age < 100:
+            self.__age = age
+        else:
+            print(" Недопустимый возраст")
+
+    @property
+    def name(self):
+        return self.__name
+
+    @name.setter
+    def name (self, name):
+        self.__name = str(name)

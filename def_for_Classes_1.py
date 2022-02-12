@@ -1,8 +1,14 @@
 from Classes_1 import  Myclass_1
 from Classes_1 import  Myclass_2
+from Classes_1 import  MyClass_3
+from Classes_1 import  MyNomber
+from Classes_1 import  MyPercentClass
 from Classes_1 import  example
+from Classes_1 import  example_3
 from Classes_1 import  equations_1
 from Classes_1 import  equations_2
+from Classes_1 import  GetSetDemonstration_1
+from Classes_1 import  GetSetDemonstration_2
 
 
 def def_for_Classes_1 ():
