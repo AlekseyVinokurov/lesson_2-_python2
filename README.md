@@ -164,6 +164,27 @@ class equations_2:
         z = obj(temp)
         return z
 ```
+
+
+# Вариант kwargs Класс с таблицей и словарем
+``` python
+class example_3:
+
+    def __init__(self, **kwargs):
+        self.ans = kwargs
+
+    def __str__(self):
+        s: str = ""
+
+        for kwarg, name in self.ans.items():
+            s += f"{kwarg}: {name} \n"
+        return (s)
+```
+
+
+
+
+
 Вызов для класса с несколькими аргументами
 ```python
 e1 = example(1, 2, 3, 6, 8)
@@ -273,9 +294,6 @@ number_1 = MyNomber(17)
 
 
 ```
-
-
-
 > Проценты
 
 ```python
@@ -318,26 +336,108 @@ class MyPercentClass:
         return str(self.x*100)+"%"
 
 ```
-Вызов
+> Вариант 1 Работа с классами (ограничение доступа к атрибутам)
+через раграничение полномочи с помощью отдельных методов класса
+
+```pytyon
+class GetSetDemonstration_1:
+    def __init__(self, name = "Без имени", age = 0):
+        self.__name = name
+        self.__age = age
+
+    def get_age(self):
+        return self.__age
+    def set_age (self, age):
+        if 1< age < 100:
+            self.__age = age
+        else:
+            print(" Недопустимый возраст")
+
+    def get_name(self):
+        return self.__name
+    def set_name (self, name):
+        self.__name = str(name)
+```
+
+> Вариант через применение декараторов
+```python
+class GetSetDemonstration_2:
+    def __init__(self, name = "Без имени", age = 0):
+        self.__name = name
+        self.__age = age
+
+    @property
+    def age(self):
+        return self.__age
+
+    @age.setter
+    def age (self, age):
+        if 1< age < 100:
+            self.__age = age
+        else:
+            print(" Недопустимый возраст")
+
+    @property
+    def name(self):
+        return self.__name
+
+    @name.setter
+    def name (self, name):
+        self.__name = str(name)
+
+```
+Вызовы предыдущего метода
+```python
+
+gsdem_1 = GetSetDemonstration_1()
+        gsdem_2 = GetSetDemonstration_1("Bill")
+        gsdem_3 = GetSetDemonstration_1("Jeck", 15)
+        print(f"Возраст {gsdem_2.get_name()} составаляет {gsdem_2.get_age()}")
+        gsdem_2.set_age(18)
+        print(f"Возраст {gsdem_2.get_name()} составаляет {gsdem_2.get_age()}")
+        gsdem_1.set_name("Вася")
+        print(f"меня зовут {gsdem_1.get_name()} ")
+
+        gsdem_11 = GetSetDemonstration_2()
+        gsdem_22 = GetSetDemonstration_2("Well")
+        gsdem_33 = GetSetDemonstration_2("Trus", 15)
+        print(f"Возраст {gsdem_22.name} составаляет {gsdem_22.age}")
+        gsdem_22.age = 18
+        print(f"Возраст {gsdem_22.name} составаляет {gsdem_22.age}")
+        gsdem_11.name = "Даша"
+        print(f"минэ зовут {gsdem_11.name} ")
+```
+
+
+
+Вызовы для класса
 ```python
 perc = MyPercentClass()
-    perc.get_value(10)
-    print(perc)
-    per=300+perc
-    print(per)
-    per=250*perc.get_value(20)
-    print(per)
+perc.get_value(10)
+print(perc)
+per=300+perc
+print(per)
+per=250*perc.get_value(20)
+print(per)
+perc=perc
 
-    perc=perc
-
-
+objExample_3 = example_3(Person_1 = "TOM", Person_2 = "Elena", Person_3 = "Alex")
+print("Example 3")
+print(objExample_3)
 
 ```
 
 
+
+
 ## TODO
 - [X] Написать собственный класс процентов
-- [ ] Чётко выделить разницу поле / свойство
-- [ ] Привести пример работы с множеством аргументов с применением KEYWarks
-- [ ] Привести примеры наследования.
+- [X] Чётко выделить разницу поле / свойство
+- [X] Привести пример работы с множеством аргументов с применением KEYWarks
+- [X] Привести примеры наследования.
+- [ ] Разобрать работу с файлами
+- [ ] Начать изучать структуры
+- [ ] Научится преобразовывать полученый из файла объкт в объект класса
+- [ ] Методы логирования
+- [ ] Способы хранения конфигурации программы
 - [ ] Продолжить работы с примером.
